@@ -1,11 +1,12 @@
-import { setCookies } from "cookies-next";
-import { useRouter } from "next/router";
 import React from "react";
-import { useMutation } from "react-query";
-import { authLogin } from "../../api";
-import { toast } from 'react-toastify';
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from 'react-toastify';
+import { useRouter } from "next/router";
+import { useMutation } from "react-query";
+import { setCookies } from "cookies-next";
+
+import { authLogin } from "../../api";
 import logo_trans from "../../public/logo.png"
 
 export default function Login() {
@@ -34,7 +35,7 @@ export default function Login() {
 
             setCookies("auth-token", response.data.data.token)
             setTimeout(() => {
-                window.location = "/app/user"
+                window.location = "/app"
             }, 1500)
         },
         onError: (error) => {
@@ -57,7 +58,7 @@ export default function Login() {
                             </Link>
                         </div>
 
-                        <h1 className="text-center text-xl mb-2">Login</h1>
+                        <h1 className="text-center text-2xl mb-2">Login</h1>
 
                         <form className="flex flex-col items-center"onSubmit={HandleSubmit}>
                             <div className="mt-2 w-full">
@@ -86,7 +87,7 @@ export default function Login() {
                             />
                             </div>
 
-                            <button className="p-4 w-full mt-4 text-white bg-yellow-500 rounded-lg">
+                            <button className="p-4 w-full mt-4 text-white bg-amber-500 rounded-lg">
                                 Login
                             </button>
                         </form>

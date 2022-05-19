@@ -55,7 +55,7 @@ export default function Login() {
                             </Link>
                         </div>
 
-                        <h1 className="text-center text-3xl">Register</h1>
+                        <h1 className="text-center text-2xl">Register</h1>
 
                         <form className="flex flex-col items-center"onSubmit={HandleSubmit}>
                             <div className="mt-2 w-full">
@@ -97,7 +97,7 @@ export default function Login() {
                                 />
                             </div>
 
-                            <button className="p-4 w-full mt-3 text-white bg-yellow-500 rounded-lg">
+                            <button className="p-4 w-full mt-3 text-white bg-amber-500 rounded-lg">
                                 Login
                             </button>
                         </form>
