@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-const baseURL = process.env.BACKEND_BASE_URL || "http://localhost:5000";
+const baseURL = process.env.BACKEND_BASE_URL
 
 const config = {
     baseURL,

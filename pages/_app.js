@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -9,6 +10,10 @@ const queryClient = new QueryClient()
 function MyApp({ Component, pageProps }) {
   	return (
 		<>
+		<Head>
+			<title>UNIOSUN Teaching Hospital, Osogbo</title>
+		</Head>
+
 		<ToastContainer position="top-left" newestOnTop={true} pauseOnHover={false} autoClose={3000} />
 
 		<QueryClientProvider client={queryClient}>

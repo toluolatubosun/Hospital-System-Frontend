@@ -1,13 +1,45 @@
 import React from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { useMutation } from "react-query";
 
-import Link from "next/link";
-import Image from "next/image";
-import logo_trans from "../../public/logo.png"
+import { patientCreate } from "../../api";
 
 export default function Add() {
+    const router = useRouter()
+
     const HandleSubmit = (e) => {
         e.preventDefault()
+
+        const data = new FormData()
+        for (const key in formData) {
+            if (formData[key] != "") {
+                data.append(key, formData[key]);
+            }
+        }
+        
+        mutate(data)
     }
+
+    const { mutate } = useMutation(patientCreate, {
+        onMutate: () => {
+            toast.info("Creating Patient...", {
+                autoClose: false
+            })
+        },
+        onSuccess: (response) => {
+            toast.dismiss()
+            toast.success(response.data.message)
+
+            setTimeout(() => {
+                router.push("/app/search")
+            }, 1000)
+        },
+        onError: (error) => {
+            toast.dismiss()
+            toast.error(error.response.data.message || error.message || "An Error Occurred")
+        }
+    });
 
     const [formData, setFormData] = React.useState({
         hospitalNumber: '',
@@ -242,14 +274,14 @@ export default function Add() {
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
-                                                gender: e.target.value
+                                                sex: e.target.value
                                             })
                                         }
                                         name="gender"
-                                        value={formData.gender}
+                                        value={formData.sex}
                                         required
                                     >
-                                        <option>Gender</option>
+                                        <option>Sex</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                                     </select>
@@ -341,19 +373,34 @@ export default function Add() {
                                 </div>
 
                                 <div className="mt-2 w-full">
-                                    <label>Diagnosis *</label>
+                                    <label>Ward *</label>
                                     <input
                                         className="block w-full p-3 border border-gray-300 rounded-lg"
                                         type="text"
-                                        placeholder="Diagnosis"
-                                        value={formData.diagnosis}
+                                        placeholder="Ward"
+                                        value={formData.ward}
                                         onChange={(e) => setFormData({
                                             ...formData,
-                                            diagnosis: e.target.value
+                                            ward: e.target.value
                                         })}
                                         required
                                     />
                                 </div>
+                            </div>
+
+                            <div className="mt-2 w-full">
+                                <label>Diagnosis *</label>
+                                <input
+                                    className="block w-full p-3 border border-gray-300 rounded-lg"
+                                    type="text"
+                                    placeholder="Diagnosis"
+                                    value={formData.diagnosis}
+                                    onChange={(e) => setFormData({
+                                        ...formData,
+                                        diagnosis: e.target.value
+                                    })}
+                                    required
+                                />
                             </div>
 
                             <button className="p-4 w-full mt-4 text-white bg-amber-500 rounded-lg">
