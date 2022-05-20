@@ -34,9 +34,10 @@ export default function Login() {
             toast.success(response.data.message)
 
             setCookies("auth-token", response.data.data.token)
+            
             setTimeout(() => {
                 window.location = "/app"
-            }, 1500)
+            }, 1000)
         },
         onError: (error) => {
             toast.dismiss()

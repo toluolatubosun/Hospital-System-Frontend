@@ -1,5 +1,6 @@
 import React from "react";
 import { toast } from 'react-toastify';
+import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 
 import { authRegister } from "../../api";
@@ -9,6 +10,7 @@ import Image from "next/image";
 import logo_trans from "../../public/logo.png"
 
 export default function Login() {
+    const router = useRouter()
 
     const [formData, setFormData] = React.useState({
         name: '',
@@ -34,7 +36,7 @@ export default function Login() {
 
             setTimeout(() => {
                 router.push("/auth/login")
-            }, 1500)
+            }, 1000)
         },
         onError: (error) => {
            toast.error(error.response.data.message || error.message || "An Error Occurred");
@@ -98,7 +100,7 @@ export default function Login() {
                             </div>
 
                             <button className="p-4 w-full mt-3 text-white bg-amber-500 rounded-lg">
-                                Login
+                                Register
                             </button>
                         </form>
                     </div>
